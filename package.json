@@ -1,0 +1,29 @@
+{
+  "name": "guardian-process",
+  "version": "1.0.0",
+  "description": "Background process to start guardian-angel and configure firewall",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/e2guardian-angel/guardian-process.git"
+  },
+  "keywords": [
+    "content",
+    "filter",
+    "process"
+  ],
+  "author": "Justin Schwartzbeck",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/e2guardian-angel/guardian-process/issues"
+  },
+  "homepage": "https://github.com/e2guardian-angel/guardian-process#readme",
+  "dependencies": {
+    "daemon": "1.1.0",
+    "kubernetes-client": "9.0.0",
+    "yaml": "1.10.2"
+  }
+}
