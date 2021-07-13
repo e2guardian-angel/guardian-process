@@ -23,7 +23,12 @@
   "homepage": "https://github.com/e2guardian-angel/guardian-process#readme",
   "dependencies": {
     "daemon": "1.1.0",
+    "got": "11.8.2",
+    "joi": "17.4.0",
     "kubernetes-client": "9.0.0",
+    "nconf": "0.11.3",
+    "poll-until-promise": "3.6.1",
+    "selfsigned": "1.10.11",
     "yaml": "1.10.2"
   }
 }

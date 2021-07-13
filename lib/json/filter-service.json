@@ -1,0 +1,32 @@
+{
+  "apiVersion": "v1",
+  "kind": "Service",
+  "metadata": {
+    "name": "webfilter",
+    "labels": {
+      "app": "webfilter"
+    }
+  },
+  "spec": {
+    "type": "NodePort",
+    "selector": {
+      "app": "webfilter"
+    },
+    "ports": [
+      {
+        "name": "squid",
+        "protocol": "TCP",
+        "port": 3128,
+        "targetPort": 3128,
+        "nodePort": 30128
+      },
+      {
+        "name": "transocks",
+        "protocol": "TCP",
+        "port": 12345,
+        "targetPort": 12345,
+        "nodePort": 30345
+      }
+    ]
+  }
+}

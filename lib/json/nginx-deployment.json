@@ -1,0 +1,65 @@
+{
+  "apiVersion": "apps/v1",
+  "kind": "Deployment",
+  "metadata": {
+    "name": "nginx",
+    "labels": {
+      "app": "nginx"
+    }
+  },
+  "spec": {
+    "replicas": 1,
+    "selector": {
+      "matchLabels": {
+        "app": "nginx"
+      }
+    },
+    "template": {
+      "metadata": {
+        "labels": {
+          "app": "nginx"
+        }
+      },
+      "spec": {
+        "containers": [
+          {
+            "name": "nginx",
+            "image": "jusschwa/guardian-nginx:latest",
+            "ports": [
+              {
+                "containerPort": 80
+              },
+              {
+                "containerPort": 443
+              }
+            ],
+            "volumeMounts": [
+              {
+                "mountPath": "/opt/guardian/conf",
+                "name": "guardian-conf-volume"
+              },
+              {
+                "mountPath": "/opt/guardian/ssl",
+                "name": "guardian-tls-volume"
+              }
+            ]
+          }
+        ],
+        "volumes": [
+          {
+            "name": "guardian-conf-volume",
+            "configMap": {
+              "name": "guardian-conf"
+            }
+          },
+          {
+            "name": "guardian-tls-volume",
+            "secret": {
+              "secretName": "guardian-tls"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

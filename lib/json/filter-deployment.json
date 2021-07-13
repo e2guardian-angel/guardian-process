@@ -1,0 +1,90 @@
+{
+  "apiVersion": "apps/v1",
+  "kind": "Deployment",
+  "metadata": {
+    "name": "webfilter",
+    "labels": {
+      "app": "webfilter"
+    }
+  },
+  "spec": {
+    "replicas": 1,
+    "selector": {
+      "matchLabels": {
+        "app": "webfilter"
+      }
+    },
+    "template": {
+      "metadata": {
+        "labels": {
+          "app": "webfilter"
+        }
+      },
+      "spec": {
+        "containers": [
+          {
+            "name": "squid",
+            "image": "jusschwa/squid-ssl:latest",
+            "ports": [
+              {
+                "containerPort": 3128
+              }
+            ],
+            "volumeMounts": [
+              {
+                "mountPath": "/opt/guardian",
+                "name": "guardian-conf-volume"
+              },
+              {
+                "mountPath": "/etc/squid/ssl",
+                "name": "guardian-tls-volume"
+              }
+            ]
+          }, {
+            "name": "e2guardian",
+            "image": "jusschwa/e2guardian-icap:latest",
+            "ports": [
+              {
+                "containerPort": 1344
+              }
+            ],
+            "volumeMounts": [
+              {
+                "mountPath": "/opt/guardian",
+                "name": "guardian-conf-volume"
+              }
+            ]
+          }, {
+            "name": "transocks",
+            "image": "jusschwa/transocks-proxy:latest",
+            "ports": [
+              {
+                "containerPort": 12345
+              }
+            ],
+            "volumeMounts": [
+              {
+                "mountPath": "/opt/guardian",
+                "name": "guardian-conf-volume"
+              }
+            ]
+          }
+        ],
+        "volumes": [
+          {
+            "name": "guardian-conf-volume",
+            "configMap": {
+              "name": "guardian-conf"
+            }
+          },
+          {
+            "name": "guardian-tls-volume",
+            "secret": {
+              "secretName": "guardian-tls"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
