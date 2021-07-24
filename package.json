@@ -27,6 +27,7 @@
     "joi": "17.4.0",
     "kubernetes-client": "9.0.0",
     "nconf": "0.11.3",
+    "node-watch": "0.7.1",
     "poll-until-promise": "3.6.1",
     "selfsigned": "1.10.11",
     "yaml": "1.10.2"
