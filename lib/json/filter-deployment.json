@@ -52,6 +52,10 @@
               {
                 "mountPath": "/opt/guardian",
                 "name": "guardian-conf-volume"
+              },
+              {
+                "mountPath": "/opt/phrases",
+                "name": "guardian-phrases"
               }
             ]
           }, {
@@ -81,6 +85,12 @@
             "name": "guardian-tls-volume",
             "secret": {
               "secretName": "guardian-tls"
+            }
+          },
+          {
+            "name": "guardian-phrases",
+            "persistentVolumeClaim": {
+              "claimName": "phrases-pvc"
             }
           }
         ]
