@@ -24,6 +24,7 @@
   "dependencies": {
     "daemon": "1.1.0",
     "got": "11.8.2",
+    "iptabler": "0.1.0",
     "joi": "17.4.0",
     "kubernetes-client": "9.0.0",
     "nconf": "0.11.3",

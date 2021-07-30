@@ -16,15 +16,15 @@
       {
         "name": "dns-tcp",
         "protocol": "TCP",
-        "port": 53,
-        "targetPort": 53,
+        "port": 9053,
+        "targetPort": 9053,
         "nodePort": 30053
       },
       {
         "name": "dns-udp",
         "protocol": "UDP",
-        "port": 53,
-        "targetPort": 53,
+        "port": 9053,
+        "targetPort": 9053,
         "nodePort": 30053
       }
     ]
