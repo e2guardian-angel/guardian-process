@@ -1,0 +1,31 @@
+{
+  "apiVersion": "v1",
+  "kind": "Pod",
+  "metadata": {
+    "name": "transocks"
+  },
+  "spec": {
+    "hostNetwork": true,
+    "dnsPolicy": "ClusterFirstWithHostNet",
+    "containers": [
+      {
+        "name": "transocks",
+        "image": "jusschwa/transocks-proxy",
+        "volumeMounts": [
+          {
+            "mountPath": "/opt/guardian",
+            "name": "guardian-conf-volume"
+          }
+        ]
+      }
+    ],
+    "volumes": [
+      {
+        "name": "guardian-conf-volume",
+        "configMap": {
+          "name": "guardian-conf"
+        }
+      }
+    ]
+  }
+}

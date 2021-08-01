@@ -58,20 +58,6 @@
                 "name": "guardian-phrases"
               }
             ]
-          }, {
-            "name": "transocks",
-            "image": "jusschwa/transocks-proxy:latest",
-            "ports": [
-              {
-                "containerPort": 12345
-              }
-            ],
-            "volumeMounts": [
-              {
-                "mountPath": "/opt/guardian",
-                "name": "guardian-conf-volume"
-              }
-            ]
           }
         ],
         "volumes": [
