@@ -1,0 +1,48 @@
+{
+  "apiVersion": "apps/v1",
+  "kind": "DaemonSet",
+  "metadata": {
+    "name": "transocks",
+    "labels": {
+      "app": "transocks"
+    }
+  },
+  "spec": {
+    "selector": {
+      "matchLabels": {
+        "app": "transocks"
+      }
+    },
+    "template": {
+      "metadata": {
+        "labels": {
+          "app": "transocks"
+        }
+      },
+      "spec": {
+        "hostNetwork": true,
+        "dnsPolicy": "ClusterFirstWithHostNet",
+        "containers": [
+          {
+            "name": "transocks",
+            "image": "jusschwa/transocks-proxy",
+            "volumeMounts": [
+              {
+                "mountPath": "/opt/guardian",
+                "name": "guardian-conf-volume"
+              }
+            ]
+          }
+	],
+        "volumes": [
+          {
+            "name": "guardian-conf-volume",
+            "configMap": {
+              "name": "guardian-conf"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
