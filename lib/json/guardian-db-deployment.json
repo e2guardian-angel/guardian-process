@@ -1,0 +1,66 @@
+{
+  "apiVersion": "apps/v1",
+  "kind": "Deployment",
+  "metadata": {
+    "name": "guardian-db",
+    "namespace": "filter",
+    "labels": {
+      "app": "guardian-db"
+    }
+  },
+  "spec": {
+    "replicas": 1,
+    "selector": {
+      "matchLabels": {
+        "app": "guardian-db"
+      }
+    },
+    "template": {
+      "metadata": {
+        "labels": {
+          "app": "guardian-db"
+        }
+      },
+      "spec": {
+        "containers": [
+          {
+            "name": "postgres",
+            "image": "postgres:latest",
+            "volumeMounts": [
+              {
+                "mountPath": "/var/lib/postgresql/data/pgdata",
+                "name": "guardian-db"
+              }
+            ],
+            "envFrom": [
+              {
+                "secretRef": {
+                  "name": "guardian-db-creds"
+                }
+              }
+            ],
+            "env": [
+              {
+                "name": "PGDATA",
+                "value": "/var/lib/postgresql/data/pgdata"
+              }
+            ],
+            "ports": [
+              {
+                "containerPort": 27017
+              }
+            ]
+          }
+        ],
+        "volumes": [
+          {
+            "name": "guardian-db",
+            "persistentVolumeClaim": {
+              "claimName": "guardian-db-pvc"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

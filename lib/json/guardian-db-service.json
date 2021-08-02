@@ -2,15 +2,15 @@
   "apiVersion": "v1",
   "kind": "Service",
   "metadata": {
-    "name": "auth-db"
+    "name": "guardian-db"
   },
   "spec": {
     "selector": {
-      "app": "auth-db"
+      "app": "guardian-db"
     },
     "ports": [
       {
-        "name": "auth-db",
+        "name": "guardian-db",
         "protocol": "TCP",
         "port": 27017,
         "targetPort": 27017

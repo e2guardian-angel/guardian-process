@@ -2,10 +2,10 @@
   "apiVersion": "v1",
   "kind": "PersistentVolumeClaim",
   "metadata": {
-    "name": "auth-db-pvc"
+    "name": "guardian-db-pvc"
   },
   "spec": {
-    "volumeName": "auth-db",
+    "volumeName": "guardian-db",
     "storageClassName": "local-storage",
     "volumeMode": "Filesystem",
     "accessModes": [
