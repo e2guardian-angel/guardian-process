@@ -45,6 +45,11 @@
                 "secretRef": {
                   "name": "redis-pass"
                 }
+              },
+              {
+                "secretRef": {
+                  "name": "guardian-db-creds"
+                }
               }
             ]
           }

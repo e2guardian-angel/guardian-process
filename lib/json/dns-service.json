@@ -8,7 +8,7 @@
     }
   },
   "spec": {
-    "type": "NodePort",
+    "type": "ClusterIP",
     "selector": {
       "app": "dns"
     },
@@ -16,16 +16,14 @@
       {
         "name": "dns-tcp",
         "protocol": "TCP",
-        "port": 9053,
-        "targetPort": 9053,
-        "nodePort": 30053
+        "port": 53,
+        "targetPort": 9053
       },
       {
         "name": "dns-udp",
         "protocol": "UDP",
-        "port": 9053,
-        "targetPort": 9053,
-        "nodePort": 30053
+        "port": 53,
+        "targetPort": 9053
       }
     ]
   }

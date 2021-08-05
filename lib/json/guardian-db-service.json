@@ -12,8 +12,8 @@
       {
         "name": "guardian-db",
         "protocol": "TCP",
-        "port": 27017,
-        "targetPort": 27017
+        "port": 5432,
+        "targetPort": 5432
       }
     ]
   }
