@@ -138,7 +138,7 @@
     "sudo": true,
     "table": "nat",
     "append": "GUARDIAN-POSTROUTING",
-    "out_interface": "eth0",
+    "out_interface": "WAN",
     "jump": "MASQUERADE"
   }],
 
