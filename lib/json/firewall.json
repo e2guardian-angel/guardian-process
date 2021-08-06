@@ -4,10 +4,17 @@
     "sudo": true,
     "table": "nat",
     "new_chain": "GUARDIAN-LOCAL"
-  }, {
+  },{
     "sudo": true,
     "table": "nat",
     "new_chain": "GUARDIAN-GATEWAY"
+  },{
+    "sudo": true,
+    "table": "nat",
+    "new_chain": "GUARDIAN-POSTROUTING"
+  },{
+    "sudo": true,
+    "new_chain": "GUARDIAN-FORWARD"
   },{
     "sudo": true,
     "table": "nat",
@@ -18,6 +25,15 @@
     "table": "nat",
     "append": "PREROUTING",
     "jump": "GUARDIAN-GATEWAY"
+  },{
+    "sudo": true,
+    "table": "nat",
+    "append": "POSTROUTING",
+    "jump": "GUARDIAN-POSTROUTING"
+  },{
+    "sudo": true,
+    "append": "FORWARD",
+    "jump": "GUARDIAN-FORWARD"
   }],
 
   "deleteAll": [{
@@ -33,11 +49,27 @@
   },{
     "sudo": true,
     "table": "nat",
+    "delete": "POSTROUTING",
+    "jump": "GUARDIAN-POSTROUTING"
+  },{
+    "sudo": true,
+    "delete": "FORWARD",
+    "jump": "GUARDIAN-FORWARD"
+  },{
+    "sudo": true,
+    "table": "nat",
     "delete_chain": "GUARDIAN-LOCAL"
   }, {
     "sudo": true,
     "table": "nat",
     "delete_chain": "GUARDIAN-GATEWAY"
+  },{
+    "sudo": true,
+    "table": "nat",
+    "delete_chain": "GUARDIAN-POSTROUTING"
+  },{
+    "sudo": true,
+    "delete_chain": "GUARDIAN-FORWARD"
   }],
 
   "local": [{
@@ -102,6 +134,14 @@
     "toPorts": 9053
   }],
 
+  "egress": [{
+    "sudo": true,
+    "table": "nat",
+    "append": "GUARDIAN-POSTROUTING",
+    "out_interface": "eth0",
+    "jump": "MASQUERADE"
+  }],
+
   "wired": [{
     "sudo": true,
     "table": "nat",
@@ -112,7 +152,7 @@
     "sudo": true,
     "table": "nat",
     "append": "GUARDIAN-GATEWAY",
-    "in_interface": "eth1",
+    "in_interface": "LAN",
     "protocol": "tcp",
     "dport": 80,
     "jump": "REDIRECT",
@@ -121,7 +161,7 @@
     "sudo": true,
     "table": "nat",
     "append": "GUARDIAN-GATEWAY",
-    "in_interface": "eth1",
+    "in_interface": "LAN",
     "protocol": "tcp",
     "dport": 443,
     "jump": "REDIRECT",
@@ -130,7 +170,7 @@
     "sudo": true,
     "table": "nat",
     "append": "GUARDIAN-GATEWAY",
-    "in_interface": "eth1",
+    "in_interface": "LAN",
     "protocol": "udp",
     "dport": 53,
     "jump": "REDIRECT",
@@ -139,11 +179,25 @@
     "sudo": true,
     "table": "nat",
     "append": "GUARDIAN-GATEWAY",
-    "in_interface": "eth1",
+    "in_interface": "LAN",
     "protocol": "tcp",
     "dport": 53,
     "jump": "REDIRECT",
     "toPorts": 9053
+  },{
+    "sudo": true,
+    "append": "GUARDIAN-FORWARD",
+    "in_interface": "WAN",
+    "out_interface": "LAN",
+    "match": "state",
+    "state": "RELATED,ESTABLISHED",
+    "jump": "ACCEPT"
+  },{
+    "sudo": true,
+    "append": "GUARDIAN-FORWARD",
+    "in_interface": "LAN",
+    "out_interface": "WAN",
+    "jump": "ACCEPT"
   }]
 
 }
