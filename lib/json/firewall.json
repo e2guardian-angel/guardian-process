@@ -1,0 +1,149 @@
+{
+
+  "createAll": [{
+    "sudo": true,
+    "table": "nat",
+    "new_chain": "GUARDIAN-LOCAL"
+  }, {
+    "sudo": true,
+    "table": "nat",
+    "new_chain": "GUARDIAN-GATEWAY"
+  },{
+    "sudo": true,
+    "table": "nat",
+    "append": "OUTPUT",
+    "jump": "GUARDIAN-LOCAL"
+  },{
+    "sudo": true,
+    "table": "nat",
+    "append": "PREROUTING",
+    "jump": "GUARDIAN-GATEWAY"
+  }],
+
+  "deleteAll": [{
+    "sudo": true,
+    "table": "nat",
+    "delete": "PREROUTING",
+    "jump": "GUARDIAN-GATEWAY"
+  },{
+    "sudo": true,
+    "table": "nat",
+    "delete": "OUTPUT",
+    "jump": "GUARDIAN-LOCAL"
+  },{
+    "sudo": true,
+    "table": "nat",
+    "delete_chain": "GUARDIAN-LOCAL"
+  }, {
+    "sudo": true,
+    "table": "nat",
+    "delete_chain": "GUARDIAN-GATEWAY"
+  }],
+
+  "local": [{
+    "sudo": true,
+    "table": "nat",
+    "append": "GUARDIAN-LOCAL",
+    "match": "owner",
+    "uidOwner": "root",
+    "jump": "RETURN"
+  }, {
+    "sudo": true,
+    "table": "nat",
+    "append": "GUARDIAN-LOCAL",
+    "match": "owner",
+    "uidOwner": "31",
+    "jump": "RETURN"
+  },{
+    "sudo": true,
+    "table": "nat",
+    "append": "GUARDIAN-LOCAL",
+    "match": "owner",
+    "uidOwner": "32",
+    "jump": "RETURN"
+  }, {
+    "sudo": true,
+    "table": "nat",
+    "append": "GUARDIAN-LOCAL",
+    "match": "owner",
+    "uidOwner": "48",
+    "jump": "RETURN"
+  }, {
+    "sudo": true,
+    "table": "nat",
+    "append": "GUARDIAN-LOCAL",
+    "protocol": "tcp",
+    "dport": 80,
+    "jump": "REDIRECT",
+    "toPorts": 12345
+  }, {
+    "sudo": true,
+    "table": "nat",
+    "append": "GUARDIAN-LOCAL",
+    "protocol": "tcp",
+    "dport": 443,
+    "jump": "REDIRECT",
+    "toPorts": 12345
+  }, {
+    "sudo": true,
+    "table": "nat",
+    "append": "GUARDIAN-LOCAL",
+    "protocol": "udp",
+    "dport": 53,
+    "jump": "REDIRECT",
+    "toPorts": 9053
+  }, {
+    "sudo": true,
+    "table": "nat",
+    "append": "GUARDIAN-LOCAL",
+    "protocol": "tcp",
+    "dport": 53,
+    "jump": "REDIRECT",
+    "toPorts": 9053
+  }],
+
+  "wired": [{
+    "sudo": true,
+    "table": "nat",
+    "append": "GUARDIAN-GATEWAY",
+    "source": "GATEWAY_IP",
+    "jump": "RETURN"
+  },{
+    "sudo": true,
+    "table": "nat",
+    "append": "GUARDIAN-GATEWAY",
+    "in_interface": "eth1",
+    "protocol": "tcp",
+    "dport": 80,
+    "jump": "REDIRECT",
+    "toPorts": 12345
+  },{
+    "sudo": true,
+    "table": "nat",
+    "append": "GUARDIAN-GATEWAY",
+    "in_interface": "eth1",
+    "protocol": "tcp",
+    "dport": 443,
+    "jump": "REDIRECT",
+    "toPorts": 12345
+  },{
+    "sudo": true,
+    "table": "nat",
+    "append": "GUARDIAN-GATEWAY",
+    "in_interface": "eth1",
+    "protocol": "udp",
+    "dport": 53,
+    "jump": "REDIRECT",
+    "toPorts": 9053
+  },{
+    "sudo": true,
+    "table": "nat",
+    "append": "GUARDIAN-GATEWAY",
+    "in_interface": "eth1",
+    "protocol": "tcp",
+    "dport": 53,
+    "jump": "REDIRECT",
+    "toPorts": 9053
+  }]
+
+}
