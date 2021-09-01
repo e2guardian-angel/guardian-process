@@ -7,9 +7,6 @@ const p = new gProcess();
 
 let configWatcher = watch(p.configFile);
 
-// Initialize global firewall rules
-p.initFirewall();
-
 configWatcher.on('change', async function(evt, name) {
     console.log('Applying new config...');
     await p.update();
@@ -19,8 +16,6 @@ configWatcher.on('change', async function(evt, name) {
 async function gracefulShutdown() {
     console.info('Shutting down...');
     configWatcher.close();
-    console.info('Clearing firewall rules...');
-    await p.tearDownFirewall();
     console.info('guardian-process exited.');
     process.exit(0);
 }

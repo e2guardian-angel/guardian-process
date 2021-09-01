@@ -24,10 +24,13 @@
   "dependencies": {
     "got": "11.8.2",
     "iptabler": "0.1.0",
+    "iptabler-smart": "1.0.1",
     "joi": "17.4.0",
     "nconf": "0.11.3",
+    "network-config": "2.3.0",
     "node-watch": "0.7.1",
     "poll-until-promise": "3.6.1",
+    "router-setup": "1.0.1",
     "selfsigned": "1.10.11",
     "shelljs": "0.8.4",
     "yaml": "1.10.2"
