@@ -2,15 +2,15 @@
   "apiVersion": "v1",
   "kind": "Service",
   "metadata": {
-    "name": "dns",
+    "name": "dns-reverse",
     "labels": {
-      "app": "dns"
+      "app": "dns-reverse"
     }
   },
   "spec": {
     "type": "ClusterIP",
     "selector": {
-      "app": "dns"
+      "app": "dns-reverse"
     },
     "ports": [
       {

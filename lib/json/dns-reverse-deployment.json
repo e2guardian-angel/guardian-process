@@ -2,22 +2,22 @@
   "apiVersion": "apps/v1",
   "kind": "Deployment",
   "metadata": {
-    "name": "dns",
+    "name": "dns-reverse",
     "labels": {
-      "app": "dns"
+      "app": "dns-reverse"
     }
   },
   "spec": {
-    "replicas": 1,
+    "replicas": 3,
     "selector": {
       "matchLabels": {
-        "app": "dns"
+        "app": "dns-reverse"
       }
     },
     "template": {
       "metadata": {
         "labels": {
-          "app": "dns"
+          "app": "dns-reverse"
         }
       },
       "spec": {
