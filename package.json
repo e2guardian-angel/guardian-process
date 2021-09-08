@@ -30,7 +30,7 @@
     "network-config": "2.3.0",
     "node-watch": "0.7.1",
     "poll-until-promise": "3.6.1",
-    "router-setup": "1.0.2",
+    "router-setup": "1.0.3",
     "selfsigned": "1.10.11",
     "shelljs": "0.8.4",
     "yaml": "1.10.2"
